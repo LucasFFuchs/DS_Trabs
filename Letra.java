@@ -1,3 +1,3 @@
-public class Letra {
+public class Letra extends Caractere {
     
 }
