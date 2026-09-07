@@ -1,7 +1,8 @@
-public class Nota {
+public class Nota extends Letra {
     
-    public static void main(String [] args)
-    {
+    char nome;
 
+    Nota(char nome){
+        this.nome = nome;
     }
 }
