@@ -1,17 +1,13 @@
-public class Nota extends Letra_maiuscula {
-    
-    char simbolo;
-    String nome;
-    Letra_maiuscula Letra;
-
-
-
-    Nota(char simbolo, String nome, Letra_maiuscula l_simbolo){
-        this.simbolo = simbolo;
-        this.nome = nome;
-        this.Letra = new Letra_maiuscula(l_simbolo);
+public class nota implements analisaChar {
+    @Override 
+    public boolean TesteChar(char c){
+        return switch (c) {
+            case 'A', 'B', 'C', 'D', 'E', 'F', 'G' -> true;
+            default -> false;
+        };
     }
-    void TocaNota(){
-        System.out.println("sooommmm");
+    public String TraducaoTexto(char c){
+        
+
     }
 }
