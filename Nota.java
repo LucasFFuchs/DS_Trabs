@@ -6,8 +6,10 @@ public class nota implements analisaChar {
             default -> false;
         };
     }
+    @Override
     public String TraducaoTexto(char c){
         
+
 
     }
 }

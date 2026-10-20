@@ -1,26 +1,30 @@
 import org.jfugue.player.Player;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String []args){
 
-        System.out.println("teste");
-        Nota Do = new Nota('C', "Do");
+        String texto = "";
+        Scanner Leitor = new Scanner(System.in);
+        System.out.println("Insira o texto: ");
+        texto = Leitor.nextLine();
 
-        System.out.println("Nome: "+ Do.nome);
-        System.out.println("Simbolo: "+ Do.simbolo);
+        StringBuilder TextoMusica = new StringBuilder();
 
-        Nota Re = new Nota('D', "Re");
-        System.out.println("Nome: "+ Re.nome);
-        System.out.println("Simbolo: "+ Re.simbolo);
+        for (int i=0; i<texto.length(); i++){
+            char chAtual = texto.charAt(i);
+            char chProximo = texto.charAt(i+1);
+            if(i == 0){
+                char chAnterior = '\0';
+            }else{
+                char chAnterior = texto.charAt(i-1);}
+            
 
-        Nota Mi = new Nota('E', "Mi");
-        Nota Fa = new Nota('F', "Fa");
-        Nota Sol = new Nota('G', "Sol");
-        Nota La = new Nota('A', "La");
-        Nota Si = new Nota('B', "Si");
 
-        Mi.TocaNota();
+
+        }
+        
 
 
 
