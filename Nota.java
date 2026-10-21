@@ -9,7 +9,17 @@ public class Nota implements analisaChar {
         };
     }
     @Override
-    public String TraducaoTexto(char c){
+    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
+        String nota = String.valueOf(contexto.atual);
+        if(contexto.proximo == '#') {
+            nota+= "#";
+        }
+        if(contexto.proximo == 'b'){
+            nota+= "b";
+        }
+        pAtual.setUltimaNota(nota);
+        pAtual.setAnteriorEhNota(true);
+        return nota + "q ";
         
 
 
