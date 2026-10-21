@@ -9,16 +9,18 @@ public class Main {
         Scanner Leitor = new Scanner(System.in);
         System.out.println("Insira o texto: ");
         texto = Leitor.nextLine();
+        Nota nota = new Nota();
 
         StringBuilder TextoMusica = new StringBuilder();
 
         for (int i=0; i<texto.length(); i++){
-            char chAtual = texto.charAt(i);
-            char chProximo = texto.charAt(i+1);
+            char Atual = texto.charAt(i);
+            char Proximo = texto.charAt(i+1);
             if(i == 0){
-                char chAnterior = '\0';
+                char Anterior = '\0';
             }else{
-                char chAnterior = texto.charAt(i-1);}
+                char Anterior = texto.charAt(i-1);}
+            
             
 
 

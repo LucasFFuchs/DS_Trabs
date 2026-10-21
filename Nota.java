@@ -1,4 +1,6 @@
-public class nota implements analisaChar {
+public class Nota implements analisaChar {
+    
+    
     @Override 
     public boolean TesteChar(char c){
         return switch (c) {
