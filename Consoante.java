@@ -2,10 +2,15 @@ public class Consoante implements analisaChar {
     @Override
     public boolean TesteChar(char c) {
 
-        return Character.isLetter(c)
-                && "ABCDEFG"
-                .indexOf(Character.toUpperCase(c))
-                == -1;
+        char letra = Character.toUpperCase(c);
+        if(!Character.isLetter(letra)){
+            return false;
+        }
+        if("ABCDEFGIOU".indexOf(c) != -1){
+            return false;
+        }
+        return true;
+
     }
 
     @Override
