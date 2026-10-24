@@ -7,6 +7,8 @@ public class Silencio implements analisaChar {
 
     @Override
     public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
+        pAtual.setAnteriorEhNota(false);
+        
         return "Rq ";
 
     }

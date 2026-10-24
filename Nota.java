@@ -19,7 +19,7 @@ public class Nota implements analisaChar {
         }
         pAtual.setUltimaNota(nota);
         pAtual.setAnteriorEhNota(true);
-        return nota + "q ";
+        return nota + pAtual.getOitava() + "q" + "a" + pAtual.getVolume() + " ";
         
 
 

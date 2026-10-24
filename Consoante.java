@@ -8,10 +8,10 @@ public class Consoante implements analisaChar {
     }
 
     @Override
-    public String TraducaoTexto(ContextoChar ctx, ParametrosAtuais estado){
+    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
 
-        if (estado.isAnteriorEhNota()) {
-            return estado.getUltimaNota() + "q ";
+        if (pAtual.isAnteriorEhNota()) {
+            return pAtual.getUltimaNota() + pAtual.getOitava() + "q" + "a" + pAtual.getVolume() + " ";
         }
 
         return "Rq ";
