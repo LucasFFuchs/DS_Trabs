@@ -25,6 +25,12 @@ public class ParametrosAtuais {
     public void setAnteriorEhNota(boolean valor){
         this.AnteriorEhNota = valor;
     }
+    public int getOitava(){
+        return oitava;
+    }
+    public void setOitava(int oitava){
+        this.oitava = oitava;
+    }
 }
     
 

@@ -10,6 +10,7 @@ public class Main {
         Scanner Leitor = new Scanner(System.in);
         System.out.println("Insira o texto: ");
         texto = Leitor.nextLine();
+        Leitor.close();
         ParametrosAtuais parametros = new ParametrosAtuais();
         List <analisaChar> regras = InicializaRegras.criarRegras();
 
