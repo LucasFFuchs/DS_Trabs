@@ -10,6 +10,7 @@ public class Main {
         System.out.println("Insira o texto: ");
         texto = Leitor.nextLine();
         Nota nota = new Nota();
+        ParametrosAtuais parametros = new ParametrosAtuais();
 
         StringBuilder TextoMusica = new StringBuilder();
 
@@ -20,6 +21,7 @@ public class Main {
                 char Anterior = '\0';
             }else{
                 char Anterior = texto.charAt(i-1);}
+            ContextoChar contexto = new ContextoChar(Anterior, Atual, Proximo);
             
             
 

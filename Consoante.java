@@ -1,6 +1,6 @@
 public class Consoante implements analisaChar {
     @Override
-    public boolean testeChar(char c) {
+    public boolean TesteChar(char c) {
 
         return Character.isLetter(c)
                 && "ABCDEFG"
@@ -9,12 +9,12 @@ public class Consoante implements analisaChar {
     }
 
     @Override
-    public String traduzir(
+    public String TraducaoTexto(
             ContextoChar ctx,
-            EstadoMusical estado
+            ParametrosAtuais estado
     ) {
 
-        if (estado.isUltimaCoisaFoiNota()) {
+        if (estado.isAnteriorEhNota()) {
             return estado.getUltimaNota() + "q ";
         }
 
