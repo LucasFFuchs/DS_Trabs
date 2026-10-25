@@ -3,6 +3,7 @@ public class ParametrosAtuais {
     private int volume = 64;
     private int oitava = 4;
     private String ultimaNota = null;
+    private int NumInstrumento;
 
     public int getVolume() {
         return volume;
@@ -30,6 +31,12 @@ public class ParametrosAtuais {
     }
     public void setOitava(int oitava){
         this.oitava = oitava;
+    }
+    public void setNumInstrumento(int NumInstrumento){
+        this.NumInstrumento = NumInstrumento;
+    }
+    public int getNumInstrumento(){
+        return NumInstrumento;
     }
 }
     
