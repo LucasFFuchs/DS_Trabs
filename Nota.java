@@ -11,7 +11,7 @@ public class Nota implements analisaChar {
     @Override
     public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
         String nota = Duracao.tirarDuracao(contexto.pedaco);
-        char duracao = Duracao.letraDo(contexto.pedaco);
+        char duracao = Duracao.letraDeDuracao(contexto.pedaco);
 
         pAtual.setUltimaNota(nota);
         pAtual.setUltimaDuracao(duracao);

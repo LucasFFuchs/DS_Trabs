@@ -7,4 +7,8 @@ public class FormatacaoJF {
     public static String pausa() {
         return "Rq ";
     }
+
+    public static String MudaInstrumento(int novo){
+        return "I" + (novo - 1) + " ";
+    }
 }

@@ -5,7 +5,7 @@ public class Duracao {
     public static final char PADRAO = 'q';   // semínima
 
     /** "B#:2" vira 'h'. Sem duração escrita ("B#"), devolve PADRAO. */
-    public static char letraDo(String pedaco) {
+    public static char letraDeDuracao(String pedaco) {
         int doisPontos = pedaco.indexOf(':');
         if (doisPontos < 0 || doisPontos + 1 >= pedaco.length()) {
             return PADRAO;

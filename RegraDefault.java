@@ -10,9 +10,9 @@ public class RegraDefault implements analisaChar {
         boolean repete = pAtual.isAnteriorEhNota();
         pAtual.setAnteriorEhNota(false);
         if(repete){
-            return pAtual.getUltimaNota() + pAtual.getOitava() + "q" + "a" + pAtual.getVolume() + " ";
+            return FormatacaoJF.nota(pAtual.getUltimaNota(), pAtual.getOitava(), pAtual.getUltimaDuracao(), pAtual.getVolume());
         }
-        return "Rq ";
+        return FormatacaoJF.pausa();
 
     }
     

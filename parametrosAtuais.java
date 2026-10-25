@@ -1,11 +1,30 @@
 public class ParametrosAtuais {
     private boolean AnteriorEhNota = false;
     private int volume = 64;
-    private int oitava = 4;
     private String ultimaNota = null;
     private int NumInstrumento;
     private char UltimaDuracao;
     private int BPM;
+    public static final int OITAVA_MINIMA = 0;
+    public static final int OITAVA_MAXIMA = 9;
+
+    private final int oitavaBase;     // oitava inicial: para onde voltar quando não dá mais
+    private int oitava;
+
+    public ParametrosAtuais(int oitavaBase) {
+        this.oitavaBase = oitavaBase;
+        this.oitava = oitavaBase;
+    }
+
+    public void subirOitava() {
+        oitava = (oitava + 1 > OITAVA_MAXIMA) ? oitavaBase : oitava + 1;
+    }
+
+    public void descerOitava() {
+        oitava = (oitava - 1 < OITAVA_MINIMA) ? oitavaBase : oitava - 1;
+    }
+
+    public int getOitava() { return oitava; }
 
     public int getVolume() {
         return volume;
@@ -27,12 +46,6 @@ public class ParametrosAtuais {
     }
     public void setAnteriorEhNota(boolean valor){
         this.AnteriorEhNota = valor;
-    }
-    public int getOitava(){
-        return oitava;
-    }
-    public void setOitava(int oitava){
-        this.oitava = oitava;
     }
     public void setNumInstrumento(int NumInstrumento){
         this.NumInstrumento = NumInstrumento;

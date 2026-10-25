@@ -9,14 +9,15 @@ public class Oitava implements analisaChar {
     }
 
 
-    @Override 
-    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
-        pAtual.setAnteriorEhNota(false);
-        int OitavaAtual = pAtual.getOitava();
-        pAtual.setOitava(OitavaAtual + 1);
-        if(OitavaAtual + 1 >= 7){
-            
+    @Override
+    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
+        if (contexto.atual == 'V') {
+            pAtual.descerOitava();
+        } else {
+            pAtual.subirOitava();
         }
+        pAtual.setAnteriorEhNota(false);
+        return "";
     }
     
 }

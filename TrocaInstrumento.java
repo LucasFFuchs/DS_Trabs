@@ -1,5 +1,10 @@
 public class TrocaInstrumento implements analisaChar {
 
+    private static final int BANDONEON = 24;
+    private static final int AGOGO = 114;
+    private static final int TUBULAR_BELLS = 15;
+    private static final int TOTAL_INSTRUMENTOS = 128;
+
 
     @Override
     public boolean TesteChar(char c){
@@ -7,41 +12,19 @@ public class TrocaInstrumento implements analisaChar {
         }
     
     @Override
-    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
-        
-        switch (contexto.atual) {
-            case '!' -> {
-                pAtual.setNumInstrumento(24);
-                pAtual.setAnteriorEhNota(false);
-                return "I24 ";
-            }
-            case ',' -> {
-                pAtual.setNumInstrumento(114);
-                pAtual.setAnteriorEhNota(false);
-                return "I114 ";
-            }
-            case ';' -> {
-                pAtual.setNumInstrumento(15);
-                pAtual.setAnteriorEhNota(false);
-                return "I15 ";
-            }
-            case '0','2','4','6','8' -> {
-                int digito = contexto.atual - '0';
-                int InstrumentoAtual = pAtual.getNumInstrumento();
-                pAtual.setNumInstrumento(digito + InstrumentoAtual);
-                pAtual.setAnteriorEhNota(false);
-                return "I" + pAtual.getNumInstrumento() + " ";
-            }
-            case '1', '3', '5', '7', '9' -> {
-                pAtual.setNumInstrumento(15);
-                pAtual.setAnteriorEhNota(false);
-                return "I15 ";
-            }
-            default -> {
-                return "";
-            }
+    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
+        int novo = switch (contexto.atual) {
+            case '!' -> BANDONEON;
+            case ',' -> AGOGO;
+            case ';', '1', '3', '5', '7', '9' -> TUBULAR_BELLS;
+            case '0', '2', '4', '6', '8' -> pAtual.getNumInstrumento() + (contexto.atual - '0');
+            default -> throw new IllegalStateException("Caractere inesperado: " + contexto.atual);
+        };
 
-        }
+        novo = (novo - 1) % TOTAL_INSTRUMENTOS + 1;   // dá a volta: 129 vira 1
+        pAtual.setNumInstrumento(novo);
+        pAtual.setAnteriorEhNota(false);
+        return FormatacaoJF.MudaInstrumento(novo);          // o JFugue começa a contar do 0
     }
 
 }

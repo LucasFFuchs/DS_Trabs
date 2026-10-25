@@ -9,7 +9,7 @@ public class Silencio implements analisaChar {
     public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
         pAtual.setAnteriorEhNota(false);
 
-        return "Rq ";
+        return FormatacaoJF.pausa();
 
     }
     
