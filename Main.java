@@ -16,19 +16,15 @@ public class Main {
 
         StringBuilder TextoMusica = new StringBuilder();
 
-        for (int i=0; i<texto.length(); i++){
-            char Atual = texto.charAt(i);
-            char Proximo = (i == texto.length() - 1 ? '\0' : texto.charAt(i+1));
-            char Anterior = (i == 0 ? '\0' : texto.charAt(i-1));
-            ContextoChar contexto = new ContextoChar(Anterior, Atual, Proximo);
-            for(analisaChar regra: regras){
-                if(regra.TesteChar(Atual)){
+        for(String pedaco: Selecionador.separar(texto)){
+            ContextoChar contexto = new ContextoChar(pedaco);
+            for(analisaChar regra : regras){
+                if(regra.TesteChar(contexto.atual)){
                     TextoMusica.append(regra.TraducaoTexto(contexto, parametros));
                     break;
                 }
             }
-            
-            
+
         }
         
 

@@ -4,6 +4,8 @@ public class ParametrosAtuais {
     private int oitava = 4;
     private String ultimaNota = null;
     private int NumInstrumento;
+    private char UltimaDuracao;
+    private int BPM;
 
     public int getVolume() {
         return volume;
@@ -37,6 +39,18 @@ public class ParametrosAtuais {
     }
     public int getNumInstrumento(){
         return NumInstrumento;
+    }
+    public char getUltimaDuracao(){
+        return UltimaDuracao;
+    }
+    public void setUltimaDuracao(char UltimaDuracao){
+        this.UltimaDuracao = UltimaDuracao;
+    }
+    public void setBPM(int BPM){
+        this.BPM = BPM;
+    }
+    public int getBPM(){
+        return BPM;
     }
 }
     

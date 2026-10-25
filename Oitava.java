@@ -14,7 +14,9 @@ public class Oitava implements analisaChar {
         pAtual.setAnteriorEhNota(false);
         int OitavaAtual = pAtual.getOitava();
         pAtual.setOitava(OitavaAtual + 1);
-        if(OitavaAtual + 1 >=)
+        if(OitavaAtual + 1 >= 7){
+            
+        }
     }
     
 }

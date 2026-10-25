@@ -9,19 +9,17 @@ public class Nota implements analisaChar {
         };
     }
     @Override
-    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual){
-        String nota = String.valueOf(contexto.atual);
-        if(contexto.proximo == '#') {
-            nota+= "#";
-        }
-        if(contexto.proximo == 'b'){
-            nota+= "b";
-        }
+    public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
+        String nota = Duracao.tirarDuracao(contexto.pedaco);
+        char duracao = Duracao.letraDo(contexto.pedaco);
+
         pAtual.setUltimaNota(nota);
+        pAtual.setUltimaDuracao(duracao);
         pAtual.setAnteriorEhNota(true);
-        return nota + pAtual.getOitava() + "q" + "a" + pAtual.getVolume() + " ";
+        return FormatacaoJF.nota(nota, pAtual.getOitava(), duracao, pAtual.getVolume());
+    }
         
 
 
-    }
 }
+

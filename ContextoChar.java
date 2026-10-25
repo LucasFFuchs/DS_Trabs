@@ -1,13 +1,11 @@
 public class ContextoChar {
 
-    public final char anterior;
+    public final String pedaco;
     public final char atual;
-    public final char proximo;
 
-    public ContextoChar(char anterior, char atual, char proximo) {
+    public ContextoChar(String pedaco) {
 
-        this.anterior = anterior;
-        this.atual = atual;
-        this.proximo = proximo;
+        this.pedaco = pedaco;
+        this.atual = pedaco.charAt(0);
     }
 }
