@@ -8,6 +8,8 @@ public class InicializaRegras{
         regras.add(new Silencio());
         regras.add(new TrocaInstrumento());
         regras.add(new Volume());
+        regras.add(new Oitava());
+        regras.add(new Andamento());
         regras.add(new RegraDefault());
         return regras;
 

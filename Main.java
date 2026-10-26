@@ -10,26 +10,23 @@ public class Main {
         Scanner Leitor = new Scanner(System.in);
         System.out.println("Insira o texto: ");
         texto = Leitor.nextLine();
+        System.out.println("Insira o BPM inicial desejado: ");
+        int bpm = Leitor.nextInt();
         Leitor.close();
-        ParametrosAtuais parametros = new ParametrosAtuais();
         List <analisaChar> regras = InicializaRegras.criarRegras();
 
-        StringBuilder TextoMusica = new StringBuilder();
 
-        for(String pedaco: Selecionador.separar(texto)){
-            ContextoChar contexto = new ContextoChar(pedaco);
-            for(analisaChar regra : regras){
-                if(regra.TesteChar(contexto.atual)){
-                    TextoMusica.append(regra.TraducaoTexto(contexto, parametros));
-                    break;
-                }
-            }
-
+        Tradutor tradutor = new Tradutor(regras);
+        String musica = tradutor.traduzir(texto, bpm);
+        System.out.println("MusicString: " + musica);   // mostra o que vai para o JFugue
+        new Player().play(musica);
         }
+
+    }
         
 
 
 
-    }
     
-}
+    
+
