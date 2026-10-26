@@ -2,7 +2,7 @@ public class Silencio implements analisaChar {
 
     @Override 
     public boolean TesteChar(char c){
-        return ("abcdefgh".indexOf(c) >= 0);
+        return ("abcdefg".indexOf(c) >= 0);
     }
 
     @Override
