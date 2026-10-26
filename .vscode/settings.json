@@ -1,0 +1,6 @@
+{
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
+}
