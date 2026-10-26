@@ -1,3 +1,9 @@
+package regras;
+
+import musica.ContextoChar;
+import musica.FormatacaoJF;
+import musica.ParametrosAtuais;
+
 public class TrocaInstrumento implements analisaChar {
 
     private static final int BANDONEON = 24;
@@ -5,12 +11,11 @@ public class TrocaInstrumento implements analisaChar {
     private static final int TUBULAR_BELLS = 15;
     private static final int TOTAL_INSTRUMENTOS = 128;
 
-
     @Override
-    public boolean TesteChar(char c){
-        return "!,;0123456789".indexOf(c) >=0;
-        }
-    
+    public boolean TesteChar(char c) {
+        return "!,;0123456789".indexOf(c) >= 0;
+    }
+
     @Override
     public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
         int novo = switch (contexto.atual) {
@@ -21,12 +26,9 @@ public class TrocaInstrumento implements analisaChar {
             default -> throw new IllegalStateException("Caractere inesperado: " + contexto.atual);
         };
 
-        novo = (novo - 1) % TOTAL_INSTRUMENTOS + 1;   // dá a volta: 129 vira 1
+        novo = (novo - 1) % TOTAL_INSTRUMENTOS + 1;
         pAtual.setNumInstrumento(novo);
         pAtual.setAnteriorEhNota(false);
-        return FormatacaoJF.MudaInstrumento(novo);          // o JFugue começa a contar do 0
+        return FormatacaoJF.MudaInstrumento(novo);
     }
-
 }
-    
-

@@ -1,5 +1,9 @@
-public class Andamento implements analisaChar {
+package regras;
 
+import musica.ContextoChar;
+import musica.ParametrosAtuais;
+
+public class Andamento implements analisaChar {
 
     private static final int VARIACAO = 10;
     private static final int BPM_MINIMO = 20;
@@ -19,5 +23,3 @@ public class Andamento implements analisaChar {
         return "T" + novo + " ";
     }
 }
-    
-
