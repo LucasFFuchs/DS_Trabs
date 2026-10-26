@@ -1,3 +1,6 @@
+package musica;
+
+import regras.analisaChar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +15,10 @@ public class Tradutor {
     }
 
     public String traduzir(String texto, int bpmInicial) {
+        return traduzir(texto, bpmInicial, 7, 100, 6);
+    }
+
+    public String traduzir(String texto, int bpmInicial, int instrumentoInicial, int volumeInicial, int oitavaInicial) {
         String[] linhas = texto.split("\\R");
         if (linhas.length > Vozes.MAXIMO_DE_VOZES) {
             throw new IllegalArgumentException("O texto tem " + linhas.length + " linhas, mas o máximo é " + Vozes.MAXIMO_DE_VOZES + " vozes.");
@@ -20,11 +27,11 @@ public class Tradutor {
         StringBuilder musica = new StringBuilder("T" + bpmInicial + " ");
         int bpmAtual = bpmInicial;
         for (int i = 0; i < linhas.length; i++) {
-            ParametrosAtuais parametros = Vozes.criar(i);
-            parametros.setBPM(bpmAtual);                 // a voz começa no BPM em que a anterior terminou
+            ParametrosAtuais parametros = Vozes.criar(i, instrumentoInicial, volumeInicial, oitavaInicial);
+            parametros.setBPM(bpmAtual);
             musica.append("V").append(i).append(" ");
             musica.append(traduzirLinha(linhas[i], parametros));
-            bpmAtual = parametros.getBPM();              // guarda para a próxima voz
+            bpmAtual = parametros.getBPM();
         }
         return musica.toString().trim();
     }
@@ -35,8 +42,8 @@ public class Tradutor {
         Matcher atraso = ATRASO.matcher(linha);
         if (atraso.find()) {
             int beats = Integer.parseInt(atraso.group(1));
-            voz.append("Rq ".repeat(beats));             // "Rq " = pausa de semínima = 1 beat
-            linha = linha.substring(atraso.end());       // tira o "[4] " do começo da linha
+            voz.append("Rq ".repeat(beats));
+            linha = linha.substring(atraso.end());
         }
         for (String pedaco : Selecionador.separar(linha)) {
             ContextoChar contexto = new ContextoChar(pedaco);

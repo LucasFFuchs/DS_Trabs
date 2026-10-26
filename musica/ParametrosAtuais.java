@@ -1,4 +1,7 @@
+package musica;
+
 public class ParametrosAtuais {
+
     private boolean AnteriorEhNota = false;
     private int volume = 64;
     private String ultimaNota = null;
@@ -8,7 +11,7 @@ public class ParametrosAtuais {
     public static final int OITAVA_MINIMA = 0;
     public static final int OITAVA_MAXIMA = 9;
 
-    private final int oitavaBase;     // oitava inicial: para onde voltar quando não dá mais
+    private final int oitavaBase;
     private int oitava;
 
     public ParametrosAtuais(int oitavaBase) {
@@ -24,7 +27,9 @@ public class ParametrosAtuais {
         oitava = (oitava - 1 < OITAVA_MINIMA) ? oitavaBase : oitava - 1;
     }
 
-    public int getOitava() { return oitava; }
+    public int getOitava() {
+        return oitava;
+    }
 
     public int getVolume() {
         return volume;
@@ -41,30 +46,36 @@ public class ParametrosAtuais {
     public void setUltimaNota(String ultimaNota) {
         this.ultimaNota = ultimaNota;
     }
-    public boolean isAnteriorEhNota(){
+
+    public boolean isAnteriorEhNota() {
         return AnteriorEhNota;
     }
-    public void setAnteriorEhNota(boolean valor){
+
+    public void setAnteriorEhNota(boolean valor) {
         this.AnteriorEhNota = valor;
     }
-    public void setNumInstrumento(int NumInstrumento){
+
+    public void setNumInstrumento(int NumInstrumento) {
         this.NumInstrumento = NumInstrumento;
     }
-    public int getNumInstrumento(){
+
+    public int getNumInstrumento() {
         return NumInstrumento;
     }
-    public char getUltimaDuracao(){
+
+    public char getUltimaDuracao() {
         return UltimaDuracao;
     }
-    public void setUltimaDuracao(char UltimaDuracao){
+
+    public void setUltimaDuracao(char UltimaDuracao) {
         this.UltimaDuracao = UltimaDuracao;
     }
-    public void setBPM(int BPM){
+
+    public void setBPM(int BPM) {
         this.BPM = BPM;
     }
-    public int getBPM(){
+
+    public int getBPM() {
         return BPM;
     }
 }
-    
-

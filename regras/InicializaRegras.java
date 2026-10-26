@@ -1,7 +1,9 @@
+package regras;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class InicializaRegras{
+public class InicializaRegras {
     public static List<analisaChar> criarRegras() {
         List<analisaChar> regras = new ArrayList<>();
         regras.add(new Nota());
@@ -12,6 +14,5 @@ public class InicializaRegras{
         regras.add(new Andamento());
         regras.add(new RegraDefault());
         return regras;
-
     }
 }

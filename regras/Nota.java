@@ -1,13 +1,20 @@
+package regras;
+
+import musica.ContextoChar;
+import musica.Duracao;
+import musica.FormatacaoJF;
+import musica.ParametrosAtuais;
+
 public class Nota implements analisaChar {
-    
-    
-    @Override 
-    public boolean TesteChar(char c){
+
+    @Override
+    public boolean TesteChar(char c) {
         return switch (c) {
             case 'A', 'B', 'C', 'D', 'E', 'F', 'G' -> true;
             default -> false;
         };
     }
+
     @Override
     public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
         String nota = Duracao.tirarDuracao(contexto.pedaco);
@@ -18,8 +25,4 @@ public class Nota implements analisaChar {
         pAtual.setAnteriorEhNota(true);
         return FormatacaoJF.nota(nota, pAtual.getOitava(), duracao, pAtual.getVolume());
     }
-        
-
-
 }
-

@@ -1,13 +1,17 @@
+package regras;
+
+import musica.ContextoChar;
+import musica.ParametrosAtuais;
+
 public class Oitava implements analisaChar {
 
-    @Override 
-    public boolean TesteChar(char c){
-        return switch (c){
+    @Override
+    public boolean TesteChar(char c) {
+        return switch (c) {
             case '.', '?', 'V' -> true;
             default -> false;
         };
     }
-
 
     @Override
     public String TraducaoTexto(ContextoChar contexto, ParametrosAtuais pAtual) {
@@ -19,5 +23,4 @@ public class Oitava implements analisaChar {
         pAtual.setAnteriorEhNota(false);
         return "";
     }
-    
 }

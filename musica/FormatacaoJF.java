@@ -1,5 +1,7 @@
+package musica;
+
 public class FormatacaoJF {
-    
+
     public static String nota(String nome, int oitava, char duracao, int volume) {
         return nome + oitava + duracao + "a" + volume + " ";
     }
@@ -8,7 +10,7 @@ public class FormatacaoJF {
         return "Rq ";
     }
 
-    public static String MudaInstrumento(int novo){
+    public static String MudaInstrumento(int novo) {
         return "I" + (novo - 1) + " ";
     }
 }
