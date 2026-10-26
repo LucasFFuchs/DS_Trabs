@@ -1,8 +1,11 @@
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Tradutor {
 
     private final List<analisaChar> regras;
+    private static final Pattern ATRASO = Pattern.compile("^\\s*\\[(\\d{1,3})]\\s*");
 
     public Tradutor(List<analisaChar> regras) {
         this.regras = regras;
@@ -29,6 +32,12 @@ public class Tradutor {
     private String traduzirLinha(String linha, ParametrosAtuais parametros) {
         StringBuilder voz = new StringBuilder();
         voz.append("I").append(parametros.getNumInstrumento() - 1).append(" ");
+        Matcher atraso = ATRASO.matcher(linha);
+        if (atraso.find()) {
+            int beats = Integer.parseInt(atraso.group(1));
+            voz.append("Rq ".repeat(beats));             // "Rq " = pausa de semínima = 1 beat
+            linha = linha.substring(atraso.end());       // tira o "[4] " do começo da linha
+        }
         for (String pedaco : Selecionador.separar(linha)) {
             ContextoChar contexto = new ContextoChar(pedaco);
             for (analisaChar regra : regras) {
