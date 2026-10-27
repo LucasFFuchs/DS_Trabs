@@ -11,6 +11,7 @@ public class ListaPlaylist {
 
     private String nome = "Playlist";
     private final List<File> arquivos = new ArrayList<>();
+    // Guarda a ordem de reprodução sem alterar a ordem original dos arquivos.
     private final List<Integer> ordem = new ArrayList<>();
     private int posicaoFila = 0;
 
@@ -49,6 +50,7 @@ public class ListaPlaylist {
         if (aleatorio) {
             Collections.shuffle(ordem);
         }
+        // Ao mudar a lista ou o modo aleatório, a reprodução volta ao início.
         posicaoFila = 0;
     }
 
@@ -104,6 +106,7 @@ public class ListaPlaylist {
                 }
                 posicaoFila = 0;
             } else {
+                // Sem loop, marca a fila como concluída.
                 posicaoFila = ordem.size();
                 return null;
             }

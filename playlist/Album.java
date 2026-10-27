@@ -3,6 +3,7 @@ package playlist;
 import java.util.ArrayList;
 import java.util.List;
 
+// Um album reune playlists e limita quantas podem ser adicionadas.
 public class Album {
 
     public static final int LIMITE_MAXIMO = 3;
@@ -19,6 +20,7 @@ public class Album {
     }
 
     public boolean adicionar(ListaPlaylist playlist) {
+        // Recusa playlists repetidas, nulas ou alem do limite do album.
         if (playlist != null && !playlists.contains(playlist) && playlists.size() < LIMITE_MAXIMO) {
             playlists.add(playlist);
             return true;

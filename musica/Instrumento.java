@@ -18,11 +18,16 @@ public class Instrumento {
         return nome;
     }
 
+    /*Quando o println eh chamado ele chama o toString automatico
+      Ex: Instrumento piano = new Instrumento(1, Piano)
+      System.out.println(piano)
+      "Piano (GM #1)" */
     @Override
     public String toString() {
         return nome + " (GM #" + idMidi + ")";
     }
 
+    //Faz um array com as instancias dos instrumentos desejados
     public static Instrumento[] getCatalogo() {
         return new Instrumento[] {
             new Instrumento(1, "Piano Acústico"),
