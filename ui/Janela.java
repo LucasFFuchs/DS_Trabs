@@ -110,6 +110,7 @@ public class Janela extends JFrame {
         iniciarMonitorProgresso();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
         setMinimumSize(new Dimension(1060, 680));
         setPreferredSize(new Dimension(1160, 730));
         pack();
