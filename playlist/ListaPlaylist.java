@@ -43,20 +43,50 @@ public class ListaPlaylist {
     }
 
     public void atualizarOrdem() {
+        if (arquivos.isEmpty()) {
+            ordem.clear();
+            posicaoFila = 0;
+            return;
+        }
+
+        // Salva qual música está tocando agora para não perdê-la
+        int indiceAtualReal = -1;
+        if (posicaoFila >= 0 && posicaoFila < ordem.size()) {
+            indiceAtualReal = ordem.get(posicaoFila);
+        }
+
         ordem.clear();
         for (int i = 0; i < arquivos.size(); i++) {
             ordem.add(i);
         }
+
         if (aleatorio) {
             Collections.shuffle(ordem);
+            // Mantém a música atual como a primeira da fila (para não reiniciar ou repetir do nada)
+            if (indiceAtualReal != -1 && ordem.contains(indiceAtualReal)) {
+                ordem.remove(Integer.valueOf(indiceAtualReal));
+                ordem.add(0, indiceAtualReal);
+            }
         }
-        // Ao mudar a lista ou o modo aleatório, a reprodução volta ao início.
-        posicaoFila = 0;
+
+        // Atualiza a posição na fila para continuar exatamente da música que estava tocando
+        if (indiceAtualReal != -1 && ordem.contains(indiceAtualReal)) {
+            for (int i = 0; i < ordem.size(); i++) {
+                if (ordem.get(i) == indiceAtualReal) {
+                    posicaoFila = i;
+                    break;
+                }
+            }
+        } else {
+            posicaoFila = 0;
+        }
     }
 
     public void setAleatorio(boolean aleatorio) {
-        this.aleatorio = aleatorio;
-        atualizarOrdem();
+        if (this.aleatorio != aleatorio) {
+            this.aleatorio = aleatorio;
+            atualizarOrdem();
+        }
     }
 
     public void setLoop(boolean loop) {
@@ -101,8 +131,15 @@ public class ListaPlaylist {
         posicaoFila++;
         if (posicaoFila >= ordem.size()) {
             if (loop) {
-                if (aleatorio) {
+                if (aleatorio && arquivos.size() > 1) {
+                    // Guarda a última música que tocou
+                    int ultimoTocado = ordem.get(ordem.size() - 1);
                     Collections.shuffle(ordem);
+
+                    // Se o embaralhamento colocou a mesma música no começo, embaralha de novo!
+                    while (ordem.get(0) == ultimoTocado) {
+                        Collections.shuffle(ordem);
+                    }
                 }
                 posicaoFila = 0;
             } else {

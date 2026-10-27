@@ -336,13 +336,17 @@ public class Janela extends JFrame {
     }
 
     private void alternarPlayPause() {
-        if (player.getManagedPlayer().isPlaying()) {
-            player.getManagedPlayer().pause();
+        ManagedPlayer mp = player.getManagedPlayer();
+
+        if (mp.isPlaying()) {
+            mp.pause();
             definirEstadoBotaoPlay(false);
-        } else if (player.getManagedPlayer().isPaused()) {
-            player.getManagedPlayer().resume();
+        } else if (mp.isPaused() && !mp.isFinished()) {
+            // Só dá resume se estiver pausado E se o player ainda estiver "vivo"
+            mp.resume();
             definirEstadoBotaoPlay(true);
         } else {
+            // Se não está tocando, não está pausado ou já foi finalizado, começa do zero
             tocarTextoAtual();
         }
     }
@@ -350,6 +354,11 @@ public class Janela extends JFrame {
     private void parar() {
         tocandoPlaylist = false;
         player.getManagedPlayer().finish();
+
+        // ATUALIZAÇÃO: Joga o player velho fora imediatamente ao parar!
+        // Assim o isPaused() dele não vai enganar o próximo Play.
+        this.player = new Player();
+
         definirEstadoBotaoPlay(false);
         barraProgresso.setProgresso(0);
     }
@@ -485,7 +494,14 @@ public class Janela extends JFrame {
             }
             return;
         }
-        player.getManagedPlayer().finish();
+
+        // Força a parada imediata do som no motor do Java e finaliza o player
+        try {
+            SequencerManager.getInstance().getSequencer().stop();
+            player.getManagedPlayer().finish();
+        } catch (Exception e) {
+            System.err.println("Erro ao pular a música: " + e.getMessage());
+        }
     }
 
     private void anteriorMusica() {
@@ -499,8 +515,16 @@ public class Janela extends JFrame {
             }
             return;
         }
+
         playlistAtual.recuarParaAnteriorDuranteReproducao();
-        player.getManagedPlayer().finish();
+
+        // Força a parada imediata do som no motor do Java e finaliza o player
+        try {
+            SequencerManager.getInstance().getSequencer().stop();
+            player.getManagedPlayer().finish();
+        } catch (Exception e) {
+            System.err.println("Erro ao voltar a música: " + e.getMessage());
+        }
     }
 
     private void adicionarNaPlaylist() {
