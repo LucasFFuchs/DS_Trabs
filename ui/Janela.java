@@ -398,11 +398,16 @@ public class Janela extends JFrame {
             String musica = tradutor.traduzir(texto, bpm, instrumento, volume, oitava);
             resetarFatorTempo(bpm);
             definirEstadoBotaoPlay(true);
+
+            // ATUALIZAÇÃO AQUI: Recria o player para garantir sincronia
+            this.player = new Player();
+
             new Thread(() -> {
-                player.play(musica);
+                this.player.play(musica);
                 SwingUtilities.invokeLater(() -> {
                     if (!tocandoPlaylist) {
                         definirEstadoBotaoPlay(false);
+                        barraProgresso.setProgresso(0); // Garante que zera ao final
                     }
                 });
             }).start();
@@ -446,7 +451,11 @@ public class Janela extends JFrame {
                     int instrumento = getInstrumentoSelecionado();
                     String musica = tradutor.traduzir(texto, bpm, instrumento, volume, oitava);
                     resetarFatorTempo(bpm);
-                    player.play(musica);
+
+                    // ATUALIZAÇÃO AQUI: Recria o player a cada nova música da playlist
+                    this.player = new Player();
+
+                    this.player.play(musica);
                 } catch (Exception ex) {
                     System.err.println("Erro ao tocar: " + arquivoDaVez.getName());
                 }
@@ -458,7 +467,10 @@ public class Janela extends JFrame {
             }
 
             tocandoPlaylist = false;
-            SwingUtilities.invokeLater(() -> definirEstadoBotaoPlay(false));
+            SwingUtilities.invokeLater(() -> {
+                definirEstadoBotaoPlay(false);
+                barraProgresso.setProgresso(0);
+            });
         }).start();
     }
 
