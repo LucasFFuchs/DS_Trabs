@@ -9,7 +9,7 @@ public class Selecionador {
 
     //Pattern que reconhece conjunto de carateres que vao juntos para uma instrucao
     //Exs: A C# Bb D:3 F#:5 ou qualquer outro caractere
-    private static final Pattern CONJUNTO = Pattern.compile("[A-G][#b]?(:[1-7])?|.", Pattern.DOTALL);
+    private static final Pattern CONJUNTO = Pattern.compile("[A-G][#b]?(:[1-7])?|.");
 
     public static List<String> separar(String texto) {
         //Cria e retorna uma lista de Strings com todos conjuntos de caracteres que vao juntos
