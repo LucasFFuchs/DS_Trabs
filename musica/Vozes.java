@@ -2,7 +2,7 @@ package musica;
 
 public class Vozes {
 
-    //Define numero maximo de vozes e parametros individuais para cada vaz baseado no seu indice (0 a 3)
+    //Define numero maximo de vozes e parametros individuais para cada voz baseado no seu indice (0 a 3)
     public static final int MAXIMO_DE_VOZES = 4;
     private static final int[] OITAVAS = {6, 5, 4, 3};
     private static final int[] VOLUMES = {100, 80, 60, 40};
