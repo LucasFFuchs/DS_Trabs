@@ -42,6 +42,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import org.jfugue.midi.MidiFileManager;
+import org.jfugue.pattern.Pattern;
 
 //Janela principal do programa que integra o editor de texto, playlists e controles do player
 public class Janela extends JFrame {
@@ -110,6 +112,7 @@ public class Janela extends JFrame {
         iniciarMonitorProgresso();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
         setMinimumSize(new Dimension(1060, 680));
         setPreferredSize(new Dimension(1160, 730));
         pack();
@@ -170,7 +173,9 @@ public class Janela extends JFrame {
         JButton botaoUpload = Tema.botao("Abrir TXT", Tema.CARD_CLARO, Tema.TEXTO);
         JButton botaoSalvar = Tema.botao("Salvar", Tema.CARD_CLARO, Tema.TEXTO);
         JButton botaoSalvarComo = Tema.botao("Salvar Como", Tema.CARD_CLARO, Tema.TEXTO);
+        JButton botaoExportarMidi = Tema.botao("Exportar MIDI", Tema.CARD_CLARO, Tema.TEXTO);
 
+        botaoExportarMidi.addActionListener(e -> exportarMidi());
         botaoUpload.addActionListener(e -> carregarArquivo());
         botaoSalvar.addActionListener(e -> salvarArquivo(false));
         botaoSalvarComo.addActionListener(e -> salvarArquivo(true));
@@ -178,6 +183,7 @@ public class Janela extends JFrame {
         barraTopo.add(botaoUpload);
         barraTopo.add(botaoSalvar);
         barraTopo.add(botaoSalvarComo);
+        barraTopo.add(botaoExportarMidi);
 
         JLabel tituloCentral = Tema.rotulo("Digite aqui a sua música", Tema.FONTE_GRANDE, Tema.TEXTO);
         tituloCentral.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -424,6 +430,63 @@ public class Janela extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
+
+
+    private void exportarMidi() {
+        String texto = areaTexto.getText();
+
+        if (texto.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Digite ou abra uma música antes de exportar."
+            );
+            return;
+        }
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Exportar música para MIDI");
+        chooser.setFileFilter(
+                new FileNameExtensionFilter("Arquivo MIDI (*.mid)", "mid")
+        );
+
+        if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        File arquivo = chooser.getSelectedFile();
+
+        if (!arquivo.getName().toLowerCase().endsWith(".mid")) {
+            arquivo = new File(arquivo.getAbsolutePath() + ".mid");
+        }
+
+        try {
+            int bpm = sliderBpm.getValue();
+            int oitava = sliderOitava.getValue();
+            int volume = sliderVolume.getValue();
+            int instrumento = getInstrumentoSelecionado();
+
+            String musica = tradutor.traduzir(
+                    texto, bpm, instrumento, volume, oitava
+            );
+
+            Pattern pattern = new Pattern(musica);
+            MidiFileManager.savePatternToMidi(pattern, arquivo);
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "MIDI exportado com sucesso!\n" + arquivo.getAbsolutePath()
+            );
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Erro ao exportar MIDI: " + ex.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
 
     //Reproduz em sequencia os arquivos da playlist selecionada
     private void iniciarPlaylist() {
