@@ -19,10 +19,12 @@ public class ParametrosAtuais {
         this.oitava = oitavaBase;
     }
 
+    //Se nova oitava ultrapassar o limite máximo das oitavas, ele retorna a oitava base
     public void subirOitava() {
         oitava = (oitava + 1 > OITAVA_MAXIMA) ? oitavaBase : oitava + 1;
     }
 
+    //Se nova oitava for menor que o limite minimo das oitavas, ele retorna a oitava base
     public void descerOitava() {
         oitava = (oitava - 1 < OITAVA_MINIMA) ? oitavaBase : oitava - 1;
     }

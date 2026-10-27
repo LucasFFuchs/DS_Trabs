@@ -1,7 +1,7 @@
 package musica;
 
+//Concatena e retornas notas, pausa e mudanca de instrumentos na sintaxe do JFugue
 public class FormatacaoJF {
-
     public static String nota(String nome, int oitava, char duracao, int volume) {
         return nome + oitava + duracao + "a" + volume + " ";
     }

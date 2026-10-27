@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InicializaRegras {
+    //Inicializa a lista de regras que serao passadas como parametro para o tradutor
     public static List<analisaChar> criarRegras() {
         List<analisaChar> regras = new ArrayList<>();
         regras.add(new Nota());
